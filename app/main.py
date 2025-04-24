@@ -29,5 +29,5 @@ def read_user_by_email(email: str, db: Session = Depends(get_db)):
 def create_task(user_id: int, task: schemas.TaskCreate, db: Session = Depends(get_db)):
     return crud.create_task_for_user(db, user_id, task)
 
-if __name__ == "__main__":
-    uvicorn.run("your_app:app", host="0.0.0.0", port=8000)
+# if __name__ == "__main__":
+#     uvicorn.run("app:app", host="0.0.0.0", port=8000)

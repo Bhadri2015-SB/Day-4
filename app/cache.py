@@ -10,7 +10,7 @@ dotenv.load_dotenv()
 # r = redis.Redis(host=host, port=port, db=0, decode_responses=True)
 REDIS_URL = os.getenv("REDIS_URL") 
 
-redis_client = redis.from_url(REDIS_URL, decode_responses=True)
+r = redis.from_url(REDIS_URL, decode_responses=True)
 
 def get_user_cache(email: str):
     user = r.get(f"user:{email}")
