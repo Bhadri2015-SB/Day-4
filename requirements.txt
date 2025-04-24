@@ -8,6 +8,7 @@ passlib[bcrypt]
 redis
 fastapi-cache2
 python-dotenv
+MySQLdb
 aiomysql
 python-multipart
 prometheus-fastapi-instrumentator
