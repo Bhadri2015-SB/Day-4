@@ -1,0 +1,87 @@
+
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DATABASE_URL=mysql+pymysql://root:Bhadri_2919@db/backendTask
+    networks:
+      - backend
+
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_DATABASE: backendTask
+      MYSQL_ROOT_PASSWORD: Bhadri_2919
+    ports:
+      - "3307:3306"
+    networks:
+      - backend
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+    networks:
+      - backend
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+    networks:
+      - backend
+
+
+networks:
+  backend:
+# version: "3.9"
+
+# services:
+#   db:
+#     image: mysql:8
+#     container_name: mysql-db
+#     restart: always
+#     environment:
+#       MYSQL_ROOT_PASSWORD: Bhadri_2919
+#       MYSQL_DATABASE: backendTask
+#     ports:
+#       - "3307:3306"
+#     volumes:
+#       - db_data:/var/lib/mysql
+#     healthcheck:
+#       test: ["CMD", "mysqladmin", "ping", "-ppassword"]
+#       interval: 5s
+#       timeout: 10s
+#       retries: 5
+
+#   redis:
+#     image: redis:7
+#     container_name: redis
+#     restart: always
+#     ports:
+#       - "6379:6379"
+
+#   backend:
+#     build: .
+#     container_name: fastapi-backend
+#     restart: always
+#     ports:
+#       - "8000:8000"
+#     env_file:
+#       - .env
+#     depends_on:
+#       - db
+#       - redis
+
+# volumes:
+#   db_data:
